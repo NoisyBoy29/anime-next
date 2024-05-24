@@ -12,7 +12,7 @@ const outfit = Outfit({
 export default function Navbar() {
   return (
     <header className="shadow-md bg-color-secondary">
-      <div className="container flex flex-col justify-between gap-4 p-4 mx-auto md:flex-row md:items-center">
+      <div className="container flex flex-col items-center justify-between gap-4 p-4 mx-auto md:flex-row md:items-center">
         <Link
           href="/"
           className={`${outfit.className} text-2xl font-bold text-gray-800`}
@@ -23,6 +23,7 @@ export default function Navbar() {
             alt="Header Logo"
             width={120}
             height={7}
+            className="mx-auto md:mx-0"
           />
         </Link>
         <InputSearch />
