@@ -1,16 +1,15 @@
-// app/anime/[id]/page.js
+"use client";
+
 import { getAnimeResponse } from "@/libs/api";
 import VideoPlayer from "@/components/Utilities/VideoPlayer";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import ReactLoading from "react-loading";
 import Head from "next/head";
-
 export default function Page({ params: { id } }) {
   const [anime, setAnime] = useState(null);
   const [characters, setCharacters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const baseURL = process.env.BASE_URL;
   useEffect(() => {
     const fetchData = async () => {
@@ -19,18 +18,14 @@ export default function Page({ params: { id } }) {
       const characterResponse = await getAnimeResponse(
         `anime/${id}/characters`
       );
-
       // Limit the characters to the first six
       const limitedCharacters = characterResponse.data.slice(0, 6);
-
       setAnime(animeResponse);
       setCharacters(limitedCharacters);
       setIsLoading(false);
     };
-
     fetchData();
   }, [id]);
-
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -38,7 +33,6 @@ export default function Page({ params: { id } }) {
       </div>
     );
   }
-
   return (
     <div className="flex flex-col items-center min-h-screen p-8">
       <Head>
@@ -104,13 +98,10 @@ export default function Page({ params: { id } }) {
           </p>
         </div>
       </div>
-
       {/* Divider */}
       <hr className="w-full mb-8 border-t border-color-secondary max-w-screen-2xl" />
-
       {/* Row 2 */}
       <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
-
       {/* Row 3 */}
       <div className="w-full mb-8 max-w-screen-2xl">
         <h2 className="mb-4 text-2xl font-bold text-color-primary">Sinopsis</h2>
@@ -118,10 +109,8 @@ export default function Page({ params: { id } }) {
           {anime.data.synopsis}
         </p>
       </div>
-
       {/* Divider */}
       <hr className="w-full mb-8 border-t border-color-secondary max-w-screen-2xl" />
-
       {/* Row 4 */}
       <div className="w-full max-w-screen-2xl">
         <h2 className="mb-4 text-2xl font-bold text-color-primary">Karakter</h2>
@@ -161,3 +150,5 @@ export default function Page({ params: { id } }) {
         </div>
       </div>
     </div>
+  );
+}

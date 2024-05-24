@@ -3,7 +3,6 @@ import Image from "next/image";
 import InputSearch from "./InputSearch";
 import { Outfit } from "next/font/google";
 import UserActionButton from "./UserActionButton";
-import Image from "next/image";
 
 const outfit = Outfit({
   subsets: ["latin"],
