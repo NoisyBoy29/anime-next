@@ -119,7 +119,7 @@ export default function Footer() {
       </div>
       <div className="pt-4 mt-8 border-t border-gray-700">
         <p className="text-sm text-center text-gray-500">
-          © {new Date().getFullYear()} ANIMENEXT. All rights reserved.
+          © {new Date().getFullYear()} WIBUNATION. All rights reserved.
         </p>
       </div>
     </footer>
