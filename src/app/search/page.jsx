@@ -7,7 +7,7 @@ import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
 import ReactLoading from "react-loading";
 import Select from "react-select";
-import Pagination from "@/components/utilities/pagination";
+import Pagination from "@/components/Utilities/Pagination";
 
 // Define the genre options
 const genreOptions = [
