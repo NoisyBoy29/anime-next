@@ -7,6 +7,7 @@ import AnimeList from "@/components/AnimeList";
 import Header from "@/components/AnimeList/Header";
 import ReactLoading from "react-loading";
 import Select from "react-select";
+import Pagination from "@/components/utilities/pagination";
 
 // Define the genre options
 const genreOptions = [
@@ -114,13 +115,15 @@ export default function SearchPage() {
       : []
   );
 
-  useEffect(() => {
-    async function fetchAnime() {
-      setIsLoading(true); // Start loading
+  const [currentPage, setCurrentPage] = useState(1);
+  const lastPage = searchAnime?.pagination?.last_visible_page || 1;
 
-      // Construct the query string
-      let query = "";
-      if (keyword) query += `q=${keyword}`;
+  useEffect(() => {
+    async function fetchAnime(page = 1) {
+      setIsLoading(true);
+
+      let query = `page=${page}&limit=20`; // Set a default limit or fetch it from props/config
+      if (keyword) query += `&q=${keyword}`;
       if (startYear) query += `&start_date=${startYear}-01-01`;
       if (endYear) query += `&end_date=${endYear}-12-31`;
       if (genre) query += `&genres=${genre}`;
@@ -129,12 +132,21 @@ export default function SearchPage() {
       if (rating) query += `&rating=${rating}`;
 
       const result = await getAnimeResponse("anime", query);
-      setSearchAnime(result); // Set search results
-      setIsLoading(false); // End loading
+      setSearchAnime(result);
+      setIsLoading(false);
     }
 
-    fetchAnime();
-  }, [keyword, startYear, endYear, genre, minScore, status, rating]);
+    fetchAnime(currentPage);
+  }, [
+    keyword,
+    startYear,
+    endYear,
+    genre,
+    minScore,
+    status,
+    rating,
+    currentPage,
+  ]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -147,7 +159,6 @@ export default function SearchPage() {
     const status = form.status.value.trim();
     const rating = form.rating.value.trim();
 
-    // Update the URL with query parameters
     const query = new URLSearchParams();
     if (keyword) query.set("keyword", keyword);
     if (startYear) query.set("startYear", startYear);
@@ -156,7 +167,9 @@ export default function SearchPage() {
     if (minScore) query.set("minScore", minScore);
     if (status) query.set("status", status);
     if (rating) query.set("rating", rating);
+    query.set("page", 1); // Reset to first page
     router.push(`/search?${query.toString()}`);
+    setCurrentPage(1); // Reset page state
   };
 
   return (
@@ -240,7 +253,14 @@ export default function SearchPage() {
           <ReactLoading type="spin" color="#FEDD89" height="5%" width="5%" />
         </div>
       ) : (
-        <AnimeList api={searchAnime} />
+        <>
+          <AnimeList api={searchAnime} />
+          <Pagination
+            page={currentPage}
+            lastPage={lastPage}
+            setPage={setCurrentPage}
+          />
+        </>
       )}
     </>
   );
