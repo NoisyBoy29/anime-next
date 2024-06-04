@@ -19,9 +19,9 @@ export default function Navbar() {
           aria-label="Home"
         >
           <Image
-            src="/assets/header-logo.png"
+            src="https://lh3.googleusercontent.com/pw/AP1GczNrGH54cnvDIjP7TxK9S59fey9ekGNmAiokfBKhtpv6iKtJafZSI_TwEj-cXich0g8h5GbIoawcHsjJeS9z2zWP86Gum6unifRDBipKuSuiKFviZXiyy8NtmImzyyGO-MWF-MtHdEQOwNrIaTui6ihO=w958-h403-s-no-gm?authuser=0"
             alt="Header Logo"
-            width={120}
+            width={150}
             height={7}
             className="mx-auto md:mx-0"
           />
