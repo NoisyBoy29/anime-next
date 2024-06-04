@@ -21,7 +21,7 @@ export default function Footer() {
         {/* Logo and Description */}
         <div className="w-full text-center md:w-auto md:text-left">
           <Image
-            src="/assets/header-logo.png"
+            src="https://lh3.googleusercontent.com/pw/AP1GczNrGH54cnvDIjP7TxK9S59fey9ekGNmAiokfBKhtpv6iKtJafZSI_TwEj-cXich0g8h5GbIoawcHsjJeS9z2zWP86Gum6unifRDBipKuSuiKFviZXiyy8NtmImzyyGO-MWF-MtHdEQOwNrIaTui6ihO=w958-h403-s-no-gm?authuser=0"
             alt="Header Logo"
             width={200}
             height={20}
